@@ -8,7 +8,6 @@ accounts-ui
 accounts-weibo
 amplify
 backbone
-bootstrap
 jquery
 less
 coffeescript
