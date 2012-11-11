@@ -1,0 +1,28 @@
+<template name="library">
+  <div class="library">
+    <div class="title">
+      <h1>{{library.title}}</h1>
+      {{#if library.subtitle}}
+      <h2>{{library.subtitle}}</h2>
+      {{/if}}
+      <ul class="authors">
+      {{#each library.authors}}
+        <li><img class="avatar-medium" src="{{avatar}}" /></li>
+      {{/each}}
+      </ul>
+    </div>
+    <div class="books">
+      <ul>
+        {{#each books}}
+        <li data-sizex="1" data-sizey="1" data-name="{{_id}}" class="gs_w">
+          {{>bookSummary}}
+        </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
+
+<template name="bookSummary">
+
+</template>

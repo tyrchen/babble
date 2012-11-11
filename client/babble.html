@@ -1,0 +1,35 @@
+<head>
+  <title>Babble</title>
+</head>
+
+<body>
+  <div class="container">
+    {{>nav}}
+    {{#if Babble.State.story.get}}
+      {{>story}}
+    {{else}}
+      {{#if Babble.State.book.get}}
+        {{>book}}
+      {{else}}
+        {{>library}}
+      {{/if}}
+    {{/if}}
+  </div>
+</body>
+
+<template name="nav">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">{{title}}</a>
+        <div class="nav-collapse">
+          <ul class="nav pull-right">
+            <li>
+              {{loginButtons}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
