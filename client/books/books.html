@@ -1,6 +1,6 @@
 <template name="book">
+  {{#with book}}
   <div class="book">
-    {{#with book}}
     <div class="title">
       <h1>{{title}}</h1>
       {{#if subtitle}}
@@ -9,16 +9,38 @@
     </div>
     <div class="toolbar">
       <ul class="control">
-        <li><a href="#" class="active">未读</a></li>
-        <li><a href="#">已读</a></li>
+        <li><a href="#" class="{{allActive}}" data-value="0">全部</a></li>
+        <li><a href="#" class="{{unreadActive}}" data-value="1">未读</a></li>
+        {{#if writable}}
+        <li><a href="#" class="{{composeActive}}" data-value="2">撰写文章</a></li>
+        {{/if}}
       </ul>
       <span class="count">{{stories}}篇文章，{{hearts}}喜欢，{{reads}}阅读</span>
       {{#each authors}}
       <span class="author">
-        <img src="{{avatar}}" class="avatar" title="{{username}}" />
+        <a href="#"><img src="{{avatar}}" class="avatar" title="{{username}}" /></a>
       </span>
       {{/each}}
     </div>
-    {{/with}}
+  </div>
+  <div class="stories row-fluid">
+    {{#if isCompose}}
+      {{>composePanel}}
+    {{else}}
+      <ul class="thumbnails">
+        {{#each stories}}
+        <li class="span6 story-summary" data-slug="{{slug}}" data-id="{{_id}}">
+          {{>storySummary}}
+        </li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+  {{/with}}
+</template>
+
+<template name="composePanel">
+  <div class="story-compose">
+
   </div>
 </template>

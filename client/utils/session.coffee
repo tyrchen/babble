@@ -25,3 +25,7 @@ _.extend Babble.State,
     get: -> Babble.getSession('story')?.id || null
     getName: -> Babble.getSession('story')?.slug || null
     set: (value) -> Babble.setSession 'story', value
+
+  bookDisplay:
+    get: -> Babble.getSession('bookDisplay') || 0
+    set: (value) -> Babble.setSession 'bookDisplay', value
