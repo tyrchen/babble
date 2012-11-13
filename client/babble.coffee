@@ -1,16 +1,11 @@
 Babble = Babble || {}
-Babble.bodyClass = ->
+Babble.setBodyClass = ->
   if Babble.State.story.get()
-    return 'story'
+    $('body').removeClass('book library').addClass('story')
   else if Babble.State.book.get()
-    return 'book'
+    $('body').removeClass('story library').addClass('book')
   else
-    return 'library'
+    $('body').removeClass('story book').addClass('library')
 
 _.extend Template.nav,
   title: -> 'Babble'
-
-
-Meteor.startup ->
-  logger.info 'startup'
-  $('body').addClass(Babble.bodyClass())

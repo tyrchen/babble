@@ -1,21 +1,24 @@
 <template name="book">
   <div class="book">
+    {{#with book}}
     <div class="title">
       <h1>{{title}}</h1>
       {{#if subtitle}}
       <h3>{{subtitle}}</h3>
       {{/if}}
     </div>
-    <div class="row">
-      <div class="span2 well">
-        <h3>未读</h3>
-      </div>
-      <div class="span2 well">
-        <h3>全部</h3>
-      </div>
-      <div class="span8 well">
-        <p>{{stories}}篇文章，{{hearts}}喜欢，{{reads}}阅读</p>
-      </div>
+    <div class="toolbar">
+      <ul class="control">
+        <li><a href="#" class="active">未读</a></li>
+        <li><a href="#">已读</a></li>
+      </ul>
+      <span class="count">{{stories}}篇文章，{{hearts}}喜欢，{{reads}}阅读</span>
+      {{#each authors}}
+      <span class="author">
+        <img src="{{avatar}}" class="avatar" title="{{username}}" />
+      </span>
+      {{/each}}
     </div>
+    {{/with}}
   </div>
 </template>

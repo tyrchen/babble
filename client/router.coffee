@@ -37,15 +37,18 @@ Babble.Router.router = Backbone.Router.extend
     Babble.State.library.set {id: id}
     Babble.State.story.set null
     Babble.State.book.set null
+    Babble.setBodyClass()
 
   book: (id) ->
     #Babble.Router.setState 'book', slug
     Babble.State.book.set {id: id}
     Babble.State.story.set null
+    Babble.setBodyClass()
 
   story: (id) ->
     #Babble.Router.setState 'story', slug
     Babble.State.story.set {id: id}
+    Babble.setBodyClass()
 
   setLibrary: (id) ->
     this.navigate "/sets/#{id}", true

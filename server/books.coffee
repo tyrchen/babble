@@ -24,7 +24,7 @@ Meteor.methods
       createdAt: now
       updatedAt: now
       authors: [user._id]
-      articles: 0
+      stories: 0
       hearts: 0
       reads: 0
 
