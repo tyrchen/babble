@@ -36,5 +36,5 @@ if Meteor.is_client
 
     if bid
       Meteor.subscribe 'stories', bid, ->
-        logger.info 'stories for book #{bid} loaded'
+        logger.info "stories for book #{bid} loaded"
 

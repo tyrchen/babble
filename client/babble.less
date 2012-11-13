@@ -1,0 +1,26 @@
+// fix bootstrap css
+body {
+  &.library {background-color: #f2f2f0;}
+  &.book {background-color: #f4f4f4;}
+  &.story {background-color: #f9f9f9;}
+  .modal {
+    width: 70%; /* desired relative width */
+    left: 15%; /* (100%-width)/2 */
+    margin: auto auto auto auto; /* place center */
+    &.fade.in {
+      top:50px; /* fade in to correct spot */
+    }
+    form {
+      label.control-label {width: 70px;}
+      textarea {width:360px;height: 200px;}
+    }
+  }
+}
+
+.thumbnail {
+  height: 200px;
+  h3, h4 {text-align: center;}
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}

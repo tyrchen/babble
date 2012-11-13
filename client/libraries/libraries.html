@@ -1,28 +1,88 @@
 <template name="library">
   <div class="library">
-    <div class="title">
-      <h1>{{library.title}}</h1>
-      {{#if library.subtitle}}
-      <h2>{{library.subtitle}}</h2>
+    {{#with library}}
+    <div class="hero-unit">
+      <h1>{{title}}</h1>
+      {{#if subtitle}}
+      <h2>{{subtitle}}</h2>
       {{/if}}
       <ul class="authors">
-      {{#each library.authors}}
+      {{#each authors}}
         <li><img class="avatar-medium" src="{{avatar}}" /></li>
       {{/each}}
       </ul>
     </div>
-    <div class="books">
-      <ul>
+    <div class="books row-fluid">
+      <ul class="thumbnails">
         {{#each books}}
-        <li data-sizex="1" data-sizey="1" data-name="{{_id}}" class="gs_w">
+        <li class="span4 book-summary" data-slug="{{slug}}">
           {{>bookSummary}}
         </li>
         {{/each}}
+        {{#if writable}}
+        <li class="span4">
+          {{>bookCreatePanel}}
+        </li>
+        {{/if}}
       </ul>
     </div>
+    {{/with}}
   </div>
 </template>
 
 <template name="bookSummary">
+  <div class="thumbnail">
+    <div class="caption">
+      <h3>{{title}}</h3>
+      <h4>{{subtitle}}</h4>
+      <p>{{description}}</p>
 
+    </div>
+  </div>
+</template>
+
+<template name="bookCreatePanel">
+  <div class="thumbnail book-create">
+    <div class="caption">
+      <h3>创建系列</h3>
+      <h4>创建一个新的系列内容</h4>
+    </div>
+  </div>
+
+  <div class="modal fade hide" id="book-create-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>添加新系列</h3>
+    </div>
+    <div class="modal-body">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="book-title">标题</label>
+          <input type="text" class="input-large" name="title" id="book-title" placeholder="比如：关于觅珠人的一切" maxlength="16" />
+          <span class="help-inline">系列标题不能重复，且不能为空，16个字符内</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="book-slug">SLUG</label>
+          <input type="text" class="input-large" name="title" id="book-slug" placeholder="提供友好的URL，比如：about-pearl-divers" maxlength="32" />
+          <span class="help-inline">SLUG不能重复，不能为空, 32个字符内</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="book-subtitle">副标题</label>
+          <input type="text" class="input-large" name="subtitle" id="book-subtitle" placeholder="" maxlength="32" />
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="book-description">描述</label>
+          <textarea name="description" class="input-xlarge" id="book-description" placeholder="让读者能够了解这个系列是什么"></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <span class="alert-error" id="book-create-error"></span>
+      <a href="#" class="btn" id="book-create-cancel">取消</a>
+      <a href="#" class="btn btn-primary" id="book-create-submit">立即创建</a>
+    </div>
+  </div>
 </template>

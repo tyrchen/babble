@@ -1,4 +1,4 @@
-window.logger =
+logger =
   enabled: true
   level: 3
 
