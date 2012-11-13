@@ -1,5 +1,5 @@
 window.logger =
-  enabled: false
+  enabled: true
   level: 3
 
   DEBUG: 3
