@@ -4,7 +4,7 @@
     <div class="hero-unit">
       <h1>{{title}}</h1>
       {{#if subtitle}}
-      <h2>{{subtitle}}</h2>
+      <h3>{{subtitle}}</h3>
       {{/if}}
       <ul class="authors">
       {{#each authors}}
@@ -15,7 +15,7 @@
     <div class="books row-fluid">
       <ul class="thumbnails">
         {{#each books}}
-        <li class="span4 book-summary" data-slug="{{slug}}">
+        <li class="span4 book-summary" data-slug="{{slug}}" data-id="{{_id}}">
           {{>bookSummary}}
         </li>
         {{/each}}

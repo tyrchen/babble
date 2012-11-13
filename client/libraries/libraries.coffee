@@ -4,7 +4,7 @@ _.extend Template.library,
       Template.bookCreatePanel.showDialog()
 
     'click .book-summary': (e) ->
-      Router.setBook $(e.currentTarget).data('slug')
+      Router.setBook $(e.currentTarget).data('id')
 
   library: ->
     lib = Babble.Library.getById Babble.State.library.get()

@@ -16,7 +16,11 @@ if Meteor.is_server
     Libraries.find {}
 
   Meteor.publish 'books', (lid) ->
-    Books.find {lid: lid}, {sort: 'createdAt': 1}
+    total = Books.find(lid:lid).count()
+    if total > 0
+      Books.find {lid: lid}, {sort: 'createdAt': 1}
+    else
+      Books.find {_id: lid}
 
   Meteor.publish 'stories', (bid) ->
     Stories.find {bid: bid}, {sort: 'createdAt': 1}
@@ -33,6 +37,10 @@ if Meteor.is_client
     if lid
       Meteor.subscribe 'books', lid, ->
         logger.info "books for library #{lid} loaded"
+    else if bid
+      Meteor.subscribe 'books', bid, ->
+        logger.info "books with id #{bid} loaded"
+
 
     if bid
       Meteor.subscribe 'stories', bid, ->

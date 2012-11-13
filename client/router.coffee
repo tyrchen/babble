@@ -25,34 +25,36 @@ Babble.Router.setState = (state, slug) ->
 Babble.Router.router = Backbone.Router.extend
   routes:
     '': 'home'
-    'sets/:slug': 'library'
-    'series/:slug': 'book'
-    'articles/:slug': 'story'
+    'sets/:id': 'library'
+    'series/:id': 'book'
+    'articles/:id': 'story'
 
   home: ->
-    logger.debug 'navigate to a sets'
-    this.navigate "/sets/#{Babble.Const.DEFAULT_LIBRARY}"
+    this.navigate "/sets/#{Babble.Const.DEFAULT_LIBRARY_ID}"
 
-  library: (slug) ->
-    Babble.Router.setState 'library', slug
+  library: (id) ->
+    #Babble.Router.setState 'library', slug
+    Babble.State.library.set {id: id}
     Babble.State.story.set null
     Babble.State.book.set null
 
-  book: (slug) ->
-    Babble.Router.setState 'book', slug
+  book: (id) ->
+    #Babble.Router.setState 'book', slug
+    Babble.State.book.set {id: id}
     Babble.State.story.set null
 
-  story: (slug) ->
-    Babble.Router.setState 'story', slug
+  story: (id) ->
+    #Babble.Router.setState 'story', slug
+    Babble.State.story.set {id: id}
 
-  setLibrary: (slug) ->
-    this.navigate "/sets/#{slug}", true
+  setLibrary: (id) ->
+    this.navigate "/sets/#{id}", true
 
-  setBook: (slug) ->
-    this.navigate "/series/#{slug}", true
+  setBook: (id) ->
+    this.navigate "/series/#{id}", true
 
-  setStory: (slug) ->
-    this.navigate "/articles/#{slug}", true
+  setStory: (id) ->
+    this.navigate "/articles/#{id}", true
 
 Router = new Babble.Router.router
 
