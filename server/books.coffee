@@ -11,13 +11,13 @@ Meteor.methods
     if not Babble.Library.writable library
       throw new Meteor.Error(403, '您没有权限添加系列')
 
-    if Babble.Book.exists info.slug
-      throw new Meteor.Error(403, "已经存在有相同slug的系列")
+    #if Babble.Book.exists info.slug
+    #  throw new Meteor.Error(403, "已经存在有相同slug的系列")
 
     now = Babble.now()
     info =
       title: info.title
-      slug: info.slug
+      #slug: info.slug
       lid: library._id
       subtitle: info.subtitle
       description: info.description

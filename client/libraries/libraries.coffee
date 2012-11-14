@@ -21,14 +21,18 @@ _.extend Template.library,
 _.extend Template.bookCreatePanel,
   events:
     'click #book-create-submit': (e) ->
-      title = $('#book-title').val()
-      slug = $('#book-slug').val()
-      subtitle = $('#book-subtitle').val()
-      description = $('#book-description').val()
+      title = $.trim $('#book-title').val()
+      #slug = $('#book-slug').val()
+      subtitle = $.trim $('#book-subtitle').val()
+      description = $.trim $('#book-description').val()
 
+      if not title
+        $("#book-create-error").text('标题不能为空')
+        return
+        
       info =
         title: title
-        slug: slug
+        #slug: slug
         lid: Babble.State.library.get()
         subtitle: subtitle
         description: description

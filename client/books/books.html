@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="stories row-fluid">
-    {{#if isCompose}}
+    {{#if composeActive}}
       {{>composePanel}}
     {{else}}
       <ul class="thumbnails">
@@ -40,7 +40,39 @@
 </template>
 
 <template name="composePanel">
-  <div class="story-compose">
+  <div class="story-compose story-summary span12">
+    <div class="link-wrap">
+      <form class="form-horizontal">
+        <div class="control-group">
+          <label class="control-label" for="book-title">标题</label>
+          <input type="text" class="input-xxlarge" name="title" id="book-title" placeholder="比如：关于觅珠人的一切" maxlength="16" />
+          <span class="help-inline">系列标题不能重复，且不能为空，16个字符内</span>
+        </div>
 
+        <div class="control-group">
+          <label class="control-label" for="book-slug">SLUG</label>
+          <input type="text" class="input-xxlarge" name="title" id="book-slug" placeholder="提供友好的URL，比如：about-pearl-divers" maxlength="32" />
+          <span class="help-inline">SLUG不能重复，不能为空, 32个字符内</span>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="book-subtitle">副标题</label>
+          <input type="text" class="input-xxlarge" name="subtitle" id="book-subtitle" placeholder="" maxlength="32" />
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="book-description">内容</label>
+          <textarea name="description" class="input-xlarge" id="book-description" placeholder="让读者能够了解这个系列是什么"></textarea>
+        </div>
+      </form>
+      <div class="footer">
+        <div class="control">
+          <span class="alert-error" id="book-create-error"></span>
+          <a href="#" class="btn" id="book-create-cancel">取消</a>
+          <a href="#" class="btn btn-primary" id="book-create-submit">立即创建</a>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
