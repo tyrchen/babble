@@ -5,7 +5,7 @@ Babble.Const.DEFAULT_LIBRARY_ID = '2df5d6ba-d644-459b-8471-1fc5aa8b774e'
 
 Babble.Const.VALID_ELEMENTS = 
   '''
-  @[title],a[href|target|title],strong/b,em/i,strike,u,
+  @[class|title],a[href|target|title],strong/b,em/i,strike,u,
   #p,-ol[type|compact],-ul[type|compact],-li,br,img[src|border|alt=|title|hspace|vspace|width|height|align],-sub,-sup,
   -blockquote,-table[border=0|cellspacing|cellpadding|width|frame|rules|
   height|align|summary|bgcolor|background|bordercolor],-tr[rowspan|width|

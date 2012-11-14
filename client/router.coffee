@@ -27,7 +27,7 @@ Babble.Router.router = Backbone.Router.extend
     '': 'home'
     'sets/:id': 'library'
     'series/:id': 'book'
-    'articles/:id': 'story'
+    'essays/:id': 'story'
 
   home: ->
     this.navigate "/sets/#{Babble.Const.DEFAULT_LIBRARY_ID}"
@@ -57,7 +57,7 @@ Babble.Router.router = Backbone.Router.extend
     this.navigate "/series/#{id}", true
 
   setStory: (id) ->
-    this.navigate "/articles/#{id}", true
+    this.navigate "/essays/#{id}", true
 
 Router = new Babble.Router.router
 

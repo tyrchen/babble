@@ -9,3 +9,10 @@ Babble.setBodyClass = ->
 
 _.extend Template.nav,
   title: -> 'Babble'
+
+_.extend Template.main,
+  showStory: ->
+    Babble.State.story.get()
+
+  showBook: ->
+    Babble.State.book.get()

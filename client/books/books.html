@@ -1,5 +1,9 @@
 <template name="book">
+
   {{#with book}}
+  <div class="menu-box" data-id="{{lid}}">
+    <i class="icon-arrow-left"></i>
+  </div>
   <div class="book">
     <div class="title">
       <h1>{{title}}</h1>
@@ -27,13 +31,9 @@
     {{#if composeActive}}
       {{>composePanel}}
     {{else}}
-      <ul class="thumbnails">
-        {{#each stories}}
-        <li class="span6 story-summary" data-slug="{{slug}}" data-id="{{_id}}">
-          {{>storySummary}}
-        </li>
-        {{/each}}
-      </ul>
+      {{#each stories}}
+        {{>storySummary}}
+      {{/each}}
     {{/if}}
   </div>
   {{/with}}
@@ -72,5 +72,19 @@
 </template>
 
 <template name="storySummary">
-  Hello world!
+  <div class="story-summary" data-slug="{{slug}}" data-id="{{_id}}">
+    <div class="link-wrap">
+      <div class="content">
+        <h1>{{title}}</h1>
+        <p>{{{content}}}</p>
+      </div>
+      <div class="footer">
+        <span class="snippet">
+        {{#each authors}}
+          <a href="#">{{username}}</a>
+        {{/each}}
+         创建于{{created}}</span>
+      </div>
+    </div>
+  </div>
 </template>

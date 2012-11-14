@@ -4,17 +4,21 @@
 
 <body>
   <div class="container">
-    {{#if Babble.State.story.get}}
-      {{>story}}
-    {{else}}
-      {{#if Babble.State.book.get}}
-        {{>book}}
-      {{else}}
-        {{>library}}
-      {{/if}}
-    {{/if}}
+    {{>main}}
   </div>
 </body>
+
+<template name="main">
+  {{#if showStory}}
+    {{>story}}
+  {{else}}
+    {{#if showBook}}
+      {{>book}}
+    {{else}}
+      {{>library}}
+    {{/if}}
+  {{/if}}
+</template>
 
 <template name="nav">
   <div class="navbar navbar-fixed-top">

@@ -91,6 +91,7 @@
     box-sizing:border-box;
     //width:385px;
     //height:385px;
+    width: 100%;
     padding:10px;
     .link-wrap {
       position:relative;
@@ -109,10 +110,12 @@
       &:hover {
         -webkit-box-shadow:0 0 8px rgba(0,0,0,0.2);
         -moz-box-shadow:0 0 8px rgba(0,0,0,0.2);
-        box-shadow:0 0 8px rgba(0,0,0,0.2)
+        box-shadow:0 0 8px rgba(0,0,0,0.2);
+        cursor: pointer;
       }
       .content {
         height: 337px;
+        overflow: hidden;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
@@ -145,11 +148,10 @@
 
     }
     .author {
-      float: left;
+      float: right;
       font-size: 12px;
       color: #444;
       white-space: nowrap;
-      width: 260px;
       overflow: hidden;
       text-overflow: ellipsis;
     }
@@ -163,6 +165,7 @@
     }
   }
   .story-summary {
+    &:nth-child(3n+1) {margin-left: 0;}
     height: 385px;
   }
   .story-compose {

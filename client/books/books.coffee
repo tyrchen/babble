@@ -1,10 +1,21 @@
 _.extend Template.book,
   events:
+    'click .menu-box': (e) ->
+      lid = $(e.currentTarget).data('id')
+      Router.setLibrary lid
+
     'click .book .control > li': (e) ->
       Babble.State.bookDisplay.set parseInt($(e.target).data('value'))
 
+    'click .story-summary': (e) ->
+      Babble.State.bookDisplay.set 0
+      Router.setStory $(e.currentTarget).data('id')
+
   book: ->
-    Babble.Book.getById Babble.State.book.get()
+    book = Babble.Book.getById Babble.State.book.get()
+    if book and not Babble.State.library.get()
+      Babble.State.library.set {id: book.lid}
+    return book
 
   stories: ->
     Stories.find bid: Babble.State.book.get()
@@ -52,6 +63,9 @@ _.extend Template.composePanel,
       $('#story-slug').val(info.slug)
       $('#story-subtitle').val(info.subtitle)
       $('#story-content').html(info.html)
+
+    $("#story-title").focus()
+
   events:
     'click #story-create-submit': (e) ->
       e.preventDefault()
@@ -59,7 +73,7 @@ _.extend Template.composePanel,
       #slug = $('#story-slug').val()
       subtitle = $.trim $('#story-subtitle').val()
       html = $.trim $('#story-content').html()
-      content = $.trim $('#story-content').text()
+      content = $.trim $('#story-content').text().slice(0, 300)
 
       if not title or not content
         $("#story-create-error").text('标题和内容不能为空')
@@ -77,6 +91,7 @@ _.extend Template.composePanel,
         content: content
 
       amplify.store 'storyToCreate', info
+
       Meteor.call 'createStory', info, (error, result) ->
         logger.info 'error:', error, 'result:', result
         if error
@@ -92,3 +107,14 @@ _.extend Template.composePanel,
   close: ->
     amplify.store('storyToCreate', null)
     Babble.State.bookDisplay.set 0
+
+_.extend Template.storySummary,
+  content: ->
+    content = @content.slice(0, 300)
+    return content.replace(/\n/g, '<br/>').replace(/&nbsp;/g, ' ')
+
+  authors: ->
+    _.map @authors, (id) -> Babble.User.getById id
+
+  created: ->
+    moment(new Date(@createdAt)).fromNow()

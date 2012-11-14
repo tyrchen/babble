@@ -23,13 +23,18 @@ if Meteor.is_server
       Books.find {_id: lid}
 
   Meteor.publish 'stories', (bid) ->
-    Stories.find {bid: bid}, {sort: 'createdAt': 1}
+    total = Stories.find(bid:bid).count()
+    if total > 0
+      Stories.find {bid: bid}, {sort: 'createdAt': 1}
+    else
+      Stories.find {_id: bid}
 
 
 if Meteor.is_client
   Meteor.autosubscribe ->
     lid = Babble.State.library.get()
     bid = Babble.State.book.get()
+    sid = Babble.State.story.get()
 
     Meteor.subscribe 'libraries', ->
       logger.info 'Libraries loaded'
@@ -45,4 +50,6 @@ if Meteor.is_client
     if bid
       Meteor.subscribe 'stories', bid, ->
         logger.info "stories for book #{bid} loaded"
-
+    else if sid
+      Meteor.subscribe 'stories', sid, ->
+        logger.info "stories with id #{sid} loaded"

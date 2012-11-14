@@ -1,3 +1,33 @@
 <template name="story">
-  Hello story!
+  {{#with story}}
+  <div class="menu-box" data-id="{{bid}}">
+    <i class="icon-arrow-left"></i>
+  </div>
+
+  <div class="story-container">
+    <div class="story">
+
+      <div class="title">
+        <h1>{{title}}</h1>
+        {{#if subtitle}}
+        <h3>{{subtitle}}</h3>
+        {{/if}}
+      </div>
+      <div class="content">
+        {{{html}}}
+      </div>
+      <div class="footer">
+        <a href="#"><i class="icon-heart"></i> 读后喜欢</a>
+        {{#with nextStory}}
+        {{#if title}}
+        <a class="pull-right next-story" href="#" data-id="{{_id}}"><i class="icon-circle-arrow-right"></i> 读下一篇文章: {{title}}</a>
+        {{else}}
+        <a class="pull-right back-to-book" href="#"><i class="icon-circle-arrow-left"></i> 全部读完，返回系列</a>
+        {{/if}}
+        {{/with}}
+      </div>
+    </div>
+
+  </div>
+  {{/with}}
 </template>
