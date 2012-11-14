@@ -29,7 +29,7 @@ _.extend Template.bookCreatePanel,
       if not title
         $("#book-create-error").text('标题不能为空')
         return
-        
+
       info =
         title: title
         #slug: slug

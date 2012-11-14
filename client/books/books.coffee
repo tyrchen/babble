@@ -27,5 +27,13 @@ _.extend Template.book,
       return 'active'
     return ''
 
+_.extend Template.composePanel,
+  rendered: ->
+    logger.debug 'compose panel rendered'
+    $('#story-content').tinymce
+      script_url: '/tiny_mce/tiny_mce.js'
+      theme: 'advanced'
+      plugins: 'autolink,lists,style,fullscreen'
+      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen"
 
 
