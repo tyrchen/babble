@@ -15,6 +15,7 @@ Books = new Meteor.Collection 'books'
 # Stories = {
 #   _id: uuid, title: '为什么写babble?', slug: 'why-bubble', createdAt: new Date()
 #   subtitle: 'xxx', authors: [], content: 'xxxx', files: []
+#   updatedAt: new Date(), publishedAt: new Date()
 #   lid: uuid, bid: uuid
 #   hearts: 3, reads: 34
 # }

@@ -8,10 +8,6 @@ Babble.Book.getById = (id) -> Books.findOne _id: id
 Babble.Book.exists = (slug) ->
   Books.find(slug: slug).count() > 0
 
-Babble.Book.create = (info) ->
-  bookId = Books.insert info
-  Libraries.update info.lid, $inc: books: 1
-
 Babble.Book.writable = (book, userId = null) ->
   if typeof book is 'string'
     book = Babble.Book.getById book
@@ -20,3 +16,10 @@ Babble.Book.writable = (book, userId = null) ->
     _.contains book.authors, userId
   else
     _.contains book.authors, Meteor.userId()
+
+
+if Meteor.is_server
+  Babble.Book.create = (info) ->
+    bookId = Books.insert info
+    Libraries.update info.lid, $inc: books: 1
+    return bookId

@@ -15,7 +15,7 @@
         <li><a href="#" class="{{composeActive}}" data-value="2">撰写文章</a></li>
         {{/if}}
       </ul>
-      <span class="count">{{stories}}篇文章，{{hearts}}喜欢，{{reads}}阅读</span>
+      <span class="count">{{total_stories}}篇文章，{{hearts}}喜欢，{{reads}}阅读</span>
       {{#each authors}}
       <span class="author">
         <a href="#"><img src="{{avatar}}" class="avatar" title="{{username}}" /></a>
@@ -69,4 +69,8 @@
     </div>
   </div>
 
+</template>
+
+<template name="storySummary">
+  Hello world!
 </template>

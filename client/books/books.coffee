@@ -6,6 +6,12 @@ _.extend Template.book,
   book: ->
     Babble.Book.getById Babble.State.book.get()
 
+  stories: ->
+    Stories.find bid: Babble.State.book.get()
+
+  total_stories: ->
+    @stories
+
   authors: ->
     _.map @authors, (id) -> Babble.User.getById id
 
@@ -29,11 +35,60 @@ _.extend Template.book,
 
 _.extend Template.composePanel,
   rendered: ->
-    logger.debug 'compose panel rendered'
+    info = amplify.store('storyToCreate')
+    logger.debug 'compose panel rendered', info
+
     $('#story-content').tinymce
       script_url: '/tiny_mce/tiny_mce.js'
       theme: 'advanced'
       plugins: 'autolink,lists,style,fullscreen'
+      mode: 'exact'
+      language: 'cn'
+      valid_elements: Babble.Const.VALID_ELEMENTS
       theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen"
 
+    if info
+      $('#story-title').val(info.title)
+      $('#story-slug').val(info.slug)
+      $('#story-subtitle').val(info.subtitle)
+      $('#story-content').html(info.html)
+  events:
+    'click #story-create-submit': (e) ->
+      e.preventDefault()
+      title = $.trim $('#story-title').val()
+      #slug = $('#story-slug').val()
+      subtitle = $.trim $('#story-subtitle').val()
+      html = $.trim $('#story-content').html()
+      content = $.trim $('#story-content').text()
 
+      if not title or not content
+        $("#story-create-error").text('标题和内容不能为空')
+        return
+
+      book = Books.findOne _id: Babble.State.book.get()
+
+      info =
+        title: title
+        #slug: slug
+        bid: book._id
+        lid: book.lid
+        subtitle: subtitle
+        html: html
+        content: content
+
+      amplify.store 'storyToCreate', info
+      Meteor.call 'createStory', info, (error, result) ->
+        logger.info 'error:', error, 'result:', result
+        if error
+          $("#story-create-error").text(error.reason)
+          return
+
+        # TODO: Notify user item created successfully
+        Template.composePanel.close()
+
+    'click #story-create-cancel': (e) ->
+      Template.composePanel.close()
+
+  close: ->
+    amplify.store('storyToCreate', null)
+    Babble.State.bookDisplay.set 0
