@@ -56,7 +56,8 @@ _.extend Template.composePanel,
       mode: 'exact'
       language: 'cn'
       valid_elements: Babble.Const.VALID_ELEMENTS
-      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen"
+      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen,|,code"
+      theme_advanced_blockformats : "p,h1,h2,h3,h4,h5,h6,pre"
 
     if info
       $('#story-title').val(info.title)
@@ -69,10 +70,18 @@ _.extend Template.composePanel,
   events:
     'click #story-create-submit': (e) ->
       e.preventDefault()
+      # format data
+      html = '<div>' + $('#story-content').html() + '</div>'
+      $node = $(html)
+      $node.find('a').attr('target', '_blank')
+      $node.find('pre').addClass('prettyprint linenums')
+
+      html = $node.html()
+      
       title = $.trim $('#story-title').val()
       #slug = $('#story-slug').val()
       subtitle = $.trim $('#story-subtitle').val()
-      html = $.trim $('#story-content').html()
+      html = $.trim html
       content = $.trim $('#story-content').text().slice(0, 300)
 
       if not title or not content

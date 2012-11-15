@@ -1,7 +1,7 @@
 _.extend Template.story,
   rendered: ->
     prettyPrint()
-    
+
   events:
     'click .menu-box': (e) ->
       bid = $(e.currentTarget).data('id')
