@@ -11,6 +11,15 @@ Babble.Story.getNextById = (id) ->
     return Stories.findOne {createdAt: $gt: story.createdAt}, {sort: createdAt: 1}
   return null
 
+Babble.Story.writable = (story, userId = null) ->
+  if typeof story is 'string'
+    story = Babble.Story.getById story
+
+  if userId
+    _.contains story.authors, userId
+  else
+    _.contains story.authors, Meteor.userId()
+
 Babble.Story.exists = (slug) ->
   Stories.find(slug: slug).count() > 0
 

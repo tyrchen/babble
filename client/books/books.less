@@ -144,12 +144,17 @@
       padding: 18px 30px 0 30px;
       border-top: 1px solid #E5E5E5;
 
-      .control {float:right;}
-
+      .controls {
+        margin-left: 10px;
+        display: none;
+      }
+      &:hover .controls {
+        display: inline;
+      }
     }
-    .author {
+    .impact {
       float: right;
-      font-size: 12px;
+      font-size: 18px;
       color: #444;
       white-space: nowrap;
       overflow: hidden;

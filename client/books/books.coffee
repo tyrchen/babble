@@ -128,5 +128,11 @@ _.extend Template.storySummary,
   created: ->
     moment(new Date(@createdAt)).fromNow()
 
+  writable: ->
+    Babble.Story.writable @_id
+
+  deletable: ->
+    Babble.Book.writable @bid
+
 Meteor.startup ->
   filepicker.setKey 'Aty5T6XmXRWyke0IG01caz'

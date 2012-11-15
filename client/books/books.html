@@ -84,6 +84,15 @@
           <a href="#">{{username}}</a>
         {{/each}}
          创建于{{created}}</span>
+        {{#if writable}}
+        <span class="controls">
+          <a href="#" class="story-edit"><i class="icon-edit"></i> 编辑</a>
+          <a href="#" class="story-delete"><i class="icon-trash"></i> 删除</a>
+        </span>
+        {{/if}}
+        <span class="impact">
+          <i class="icon-heart red1"></i> {{hearts}}
+        </span>
       </div>
     </div>
   </div>

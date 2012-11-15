@@ -17,7 +17,14 @@
         {{{html}}}
       </div>
       <div class="footer">
-        <a href="#"><i class="icon-heart"></i> 读后喜欢</a>
+        <a href="#"><i class="icon-heart red1"></i> 读后喜欢</a>
+        {{#if writable}}
+          <span class="controls">
+            <a href="#" class="story-edit"><i class="icon-edit"></i> 编辑</a>
+            <a href="#" class="story-delete"><i class="icon-trash"></i> 删除</a>
+          </span>
+        {{/if}}
+
         {{#with nextStory}}
         {{#if title}}
         <a class="pull-right next-story" href="#" data-id="{{_id}}"><i class="icon-circle-arrow-right"></i> 读下一篇文章: {{title}}</a>

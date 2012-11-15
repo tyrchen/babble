@@ -23,5 +23,13 @@ _.extend Template.story,
 
     return story
 
+  writable: ->
+    if @_id
+      Babble.Story.writable @_id
+
+  deletable: ->
+    if @bid
+      Babble.Book.writable @bid
+
   nextStory: ->
     return Babble.Story.getNextById Babble.State.story.get()
