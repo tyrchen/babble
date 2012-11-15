@@ -15,6 +15,20 @@ _.extend Template.story,
       story = Babble.Story.getById Babble.State.story.get()
       Router.setBook story.bid
 
+    'click .story-edit': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      info =
+        id: @_id
+        title: @title
+        subtitle: @subtitle
+        html: @html
+
+      # provide data to create panel so that user can edit
+      amplify.store('storyToCreate', info)
+      Babble.State.bookDisplay.set 2
+      Router.setBook @bid
+
   story: ->
     story = Babble.Story.getById Babble.State.story.get()
     if story and not Babble.State.book.get()

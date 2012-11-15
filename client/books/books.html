@@ -44,7 +44,7 @@
     <div class="link-wrap">
       <form class="form-horizontal">
         <div class="control-group">
-          <input type="text" class="input-xxlarge" name="title" id="story-title" placeholder="输入文章标题" maxlength="16" />
+          <input type="text" class="input-xxlarge" name="title" id="story-title" placeholder="输入文章标题" maxlength="64" />
         </div>
 
         <div class="control-group hide">
@@ -52,18 +52,22 @@
         </div>
 
         <div class="control-group">
-          <input type="text" class="input-xxlarge" name="subtitle" id="story-subtitle" placeholder="输入文章副标题" maxlength="32" />
+          <input type="text" class="input-xxlarge" name="subtitle" id="story-subtitle" placeholder="输入文章副标题" maxlength="64" />
         </div>
 
         <div class="control-group">
           <textarea name="description" class="input-xlarge" id="story-content" placeholder="正文"></textarea>
+        </div>
+
+        <div class="control-group">
+          <input type="hidden" name="id" id="story-id" />
         </div>
       </form>
       <div class="footer">
         <div class="control">
           <span class="alert-error" id="story-create-error"></span>
           <a href="#" class="btn" id="story-create-cancel">取消</a>
-          <a href="#" class="btn btn-primary" id="story-create-submit">创建</a>
+          <a href="#" class="btn btn-primary" id="story-create-submit">保存</a>
         </div>
       </div>
     </div>

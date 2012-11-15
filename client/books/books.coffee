@@ -47,7 +47,6 @@ _.extend Template.book,
 _.extend Template.composePanel,
   rendered: ->
     info = amplify.store('storyToCreate')
-    logger.debug 'compose panel rendered', info
 
     $('#story-content').tinymce
       script_url: '/tiny_mce/tiny_mce.js'
@@ -63,6 +62,8 @@ _.extend Template.composePanel,
       $('#story-title').val(info.title)
       $('#story-slug').val(info.slug)
       $('#story-subtitle').val(info.subtitle)
+      if info.id
+        $('#story-id').val(info.id)
       $('#story-content').html(info.html)
 
     $("#story-title").focus()
@@ -78,6 +79,7 @@ _.extend Template.composePanel,
 
       html = $node.html()
 
+      id = $('#story-id').val()
       title = $.trim $('#story-title').val()
       #slug = $('#story-slug').val()
       subtitle = $.trim $('#story-subtitle').val()
@@ -91,6 +93,7 @@ _.extend Template.composePanel,
       book = Books.findOne _id: Babble.State.book.get()
 
       info =
+        id: id
         title: title
         #slug: slug
         bid: book._id
@@ -109,6 +112,7 @@ _.extend Template.composePanel,
 
         # TODO: Notify user item created successfully
         Template.composePanel.close()
+        Router.setStory result
 
     'click #story-create-cancel': (e) ->
       Template.composePanel.close()
@@ -118,6 +122,21 @@ _.extend Template.composePanel,
     Babble.State.bookDisplay.set 0
 
 _.extend Template.storySummary,
+  events:
+    'click .story-edit': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      info =
+        id: @_id
+        title: @title
+        subtitle: @subtitle
+        html: @html
+
+      # provide data to create panel so that user can edit
+      amplify.store('storyToCreate', info)
+      Babble.State.bookDisplay.set 2
+
+
   content: ->
     content = @content.slice(0, 300)
     return content.replace(/\n/g, '<br/>').replace(/&nbsp;/g, ' ')

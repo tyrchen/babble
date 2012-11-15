@@ -27,6 +27,10 @@ Babble.Story.create = (info) ->
   bookId = Stories.insert info
   Books.update info.bid, $inc: stories: 1
 
+Babble.Story.update = (id, info) ->
+  info['updatedAt'] = Babble.now()
+  Stories.update id, $set: info
+
 if Meteor.is_server
   Babble.Story.create = (info) ->
     storyId = Stories.insert info
