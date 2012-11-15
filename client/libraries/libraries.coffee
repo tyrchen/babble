@@ -3,6 +3,9 @@ _.extend Template.library,
     'click .book-summary': (e) ->
       Router.setBook $(e.currentTarget).data('id')
 
+    'click .create-book': (e) ->
+      Template.bookCreatePanel.showDialog()
+
   library: ->
     lib = Babble.Library.getById Babble.State.library.get()
 
@@ -16,6 +19,32 @@ _.extend Template.library,
     Books.find lid: @_id
 
 _.extend Template.bookSummary,
+  events:
+    'click .book-edit': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+      logger.debug 'click book edit'
+      info =
+        id: @_id
+        title: @title
+        #slug: @slug
+        subtitle: @subtitle
+        description: @description
+      amplify.store 'bookToCreate', info
+      Template.bookCreatePanel.showDialog()
+
+    'click .book-delete': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+
+      Template.confirmDialog.show @_id, "确认删除 #{@title}?", "系列一旦被删除就不能恢复!", (id) ->
+        Meteor.call 'deleteBook', id, (error, result) ->
+          if error
+            return error.reason
+
+          Router.setLibrary Babble.State.library.get()
+          return null
+
   writable: ->
     Babble.Library.writable @lid
 
@@ -24,12 +53,10 @@ _.extend Template.bookSummary,
 
 _.extend Template.bookCreatePanel,
   events:
-    'click': (e) ->
-      Template.bookCreatePanel.showDialog()
-
     'click #book-create-submit': (e) ->
       e.preventDefault()
       e.stopPropagation()
+      id = $('#book-id').val()
       title = $.trim $('#book-title').val()
       #slug = $('#book-slug').val()
       subtitle = $.trim $('#book-subtitle').val()
@@ -40,6 +67,7 @@ _.extend Template.bookCreatePanel,
         return
 
       info =
+        id: id
         title: title
         #slug: slug
         lid: Babble.State.library.get()
@@ -47,7 +75,6 @@ _.extend Template.bookCreatePanel,
         description: description
       amplify.store 'bookToCreate', info
       Meteor.call 'createBook', info, (error, result) ->
-        logger.info 'error:', error, 'result:', result
         if error
           $("#book-create-error").text(error.reason)
           return
@@ -67,6 +94,8 @@ _.extend Template.bookCreatePanel,
   showDialog: ->
     info = amplify.store 'bookToCreate'
     if info
+      if info.id
+        $('#book-id').val(info.id)
       $('#book-title').val(info.title)
       $('#book-slug').val(info.slug)
       $('#book-subtitle').val(info.subtitle)

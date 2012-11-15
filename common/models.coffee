@@ -20,6 +20,7 @@ Books = new Meteor.Collection 'books'
 #   hearts: 3, reads: 34
 # }
 Stories = new Meteor.Collection 'stories'
+DeletedStories = new Meteor.Collection 'deleted_stories'
 
 # profile = {
 #   _id: uuid, userId: userId, online: true/false,

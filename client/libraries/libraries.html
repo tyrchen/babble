@@ -41,10 +41,10 @@
 
       <span class="controls">
         {{#if writable}}
-        <a href="#" class="story-edit"><i class="icon-edit"></i> 编辑</a>
+        <a href="#" class="book-edit"><i class="icon-edit"></i> 编辑</a>
         {{/if}}
         {{#if deletable}}
-        <a href="#" class="story-delete"><i class="icon-trash"></i> 删除</a>
+        <a href="#" class="book-delete"><i class="icon-trash"></i> 删除</a>
         {{/if}}
       </span>
     </div>
@@ -52,7 +52,7 @@
 </template>
 
 <template name="bookCreatePanel">
-  <div class="thumbnail">
+  <div class="thumbnail create-book">
     <div class="caption">
       <h3>创建系列</h3>
       <h4>创建一个新的系列内容</h4>
@@ -87,12 +87,16 @@
           <label class="control-label" for="book-description">描述</label>
           <textarea name="description" id="book-description" placeholder="让读者能够了解这个系列是什么"></textarea>
         </div>
+
+        <div class="control-group">
+          <input type="hidden" name="id" id="book-id" />
+        </div>
       </form>
     </div>
     <div class="modal-footer">
       <span class="alert-error" id="book-create-error"></span>
       <a href="#" class="btn" id="book-create-cancel">取消</a>
-      <a href="#" class="btn btn-primary" id="book-create-submit">立即创建</a>
+      <a href="#" class="btn btn-primary" id="book-create-submit">保存</a>
     </div>
   </div>
 </template>

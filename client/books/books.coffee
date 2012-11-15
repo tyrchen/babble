@@ -140,9 +140,13 @@ _.extend Template.storySummary,
       e.preventDefault()
       e.stopPropagation()
 
-      logger.debug @_id
+      Template.confirmDialog.show @_id, "确认删除 #{@title}?", "文章一旦被删除就不能恢复!", (id) ->
+        Meteor.call 'deleteStory', id, (error, result) ->
+          if error
+            return error.reason
 
-      Template.storyDeleteDialog.show @
+          Router.setBook Babble.State.book.get()
+          return null
 
 
 

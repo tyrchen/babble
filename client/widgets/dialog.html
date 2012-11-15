@@ -1,0 +1,17 @@
+<template name="confirmDialog">
+  <div class="modal fade hide" id="confirm-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 class="title"></h3>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" name="id" id="confirm-dialog-id" />
+      <p><span class="label label-important">重要提示</span> <b class="content"></b></p>
+    </div>
+    <div class="modal-footer">
+      <span id="confirm-dialog-error" class="alert-error"></span>
+      <a href="#" class="btn" id="confirm-dialog-cancel">取消</a>
+      <a href="#" class="btn btn-danger" id="confirm-dialog-submit">删除!</a>
+    </div>
+  </div>
+</template>

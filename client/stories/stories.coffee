@@ -32,9 +32,15 @@ _.extend Template.story,
     'click .story-delete': (e) ->
       e.preventDefault()
       e.stopPropagation()
-      logger.debug @_id
 
-      Template.storyDeleteDialog.show @
+      Template.confirmDialog.show @_id, "确认删除 #{@title}?", "文章一旦被删除就不能恢复!", (id) ->
+        Meteor.call 'deleteStory', id, (error, result) ->
+          if error
+            return error.reason
+
+          Router.setBook Babble.State.book.get()
+          return null
+
 
   story: ->
     story = Babble.Story.getById Babble.State.story.get()
@@ -55,29 +61,3 @@ _.extend Template.story,
   nextStory: ->
     return Babble.Story.getNextById Babble.State.story.get()
 
-_.extend Template.storyDeleteDialog,
-  events:
-    'click #story-delete-cancel': (e) ->
-      e.preventDefault()
-      Template.storyDeleteDialog.hide()
-
-    'click #story-delete-submit': (e) ->
-      e.preventDefault()
-      id = $('#story-delete-id').val()
-      Meteor.call 'deleteStory', id, (error, result) ->
-        logger.info 'error:', error, 'result:', result
-        if error
-          $("#story-delete-error").text(error.reason)
-          return
-
-        Template.storyDeleteDialog.hide()
-        Babble.State.story.set null
-
-  show: (story)->
-    $node = $('#story-delete-dialog')
-    $('#story-delete-id').val(story._id)
-    $('h3', $node).text "确认删除 #{story.title}?"
-    $('#story-delete-dialog').modal()
-
-  hide: ->
-    $('#story-delete-dialog').modal 'hide'

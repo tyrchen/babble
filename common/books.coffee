@@ -28,7 +28,16 @@ Babble.Book.Deletable = (book, userId = null) ->
 
 
 if Meteor.is_server
+  # DO NOT call the following functions directly
   Babble.Book.create = (info) ->
     bookId = Books.insert info
     Libraries.update info.lid, $inc: books: 1
     return bookId
+
+  Babble.Book.update = (id, info) ->
+    info['updatedAt'] = Babble.now()
+    Books.update id, $set: info
+
+  Babble.Book.delete = (book) ->
+    Books.remove _id: book._id
+    Libraries.update book.lid, $inc: books: -1
