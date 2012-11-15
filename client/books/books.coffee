@@ -136,6 +136,15 @@ _.extend Template.storySummary,
       amplify.store('storyToCreate', info)
       Babble.State.bookDisplay.set 2
 
+    'click .story-delete': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
+
+      logger.debug @_id
+
+      Template.storyDeleteDialog.show @
+
+
 
   content: ->
     content = @content.slice(0, 300)

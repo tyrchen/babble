@@ -49,7 +49,7 @@
     </div>
   </div>
 
-  <div class="modal fade hide" id="book-create-dialog">
+  <div class="modal fade hide create" id="book-create-dialog">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h3>添加新系列</h3>
@@ -58,8 +58,8 @@
       <form class="form-horizontal">
         <div class="control-group">
           <label class="control-label" for="book-title">标题</label>
-          <input type="text" class="input-large" name="title" id="book-title" placeholder="比如：关于觅珠人的一切" maxlength="16" />
-          <span class="help-inline">系列标题不能重复，且不能为空，16个字符内</span>
+          <input type="text" class="input-xxlarge" name="title" id="book-title" placeholder="比如：关于觅珠人的一切" maxlength="32" />
+          <span class="help-inline">系列标题不能重复，且不能为空，32个字符内</span>
         </div>
 
         <div class="control-group hide">
@@ -70,12 +70,12 @@
 
         <div class="control-group">
           <label class="control-label" for="book-subtitle">副标题</label>
-          <input type="text" class="input-large" name="subtitle" id="book-subtitle" placeholder="" maxlength="32" />
+          <input type="text" class="input-xxlarge" name="subtitle" id="book-subtitle" placeholder="" maxlength="64" />
         </div>
 
         <div class="control-group">
           <label class="control-label" for="book-description">描述</label>
-          <textarea name="description" class="input-xlarge" id="book-description" placeholder="让读者能够了解这个系列是什么"></textarea>
+          <textarea name="description" id="book-description" placeholder="让读者能够了解这个系列是什么"></textarea>
         </div>
       </form>
     </div>

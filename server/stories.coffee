@@ -55,3 +55,15 @@ Meteor.methods
 
 
     return Babble.Story.create info
+
+  deleteStory: (id) ->
+    user = Meteor.user()
+    story = Babble.Story.getById id
+    if not story
+      return null
+
+    if not Babble.Story.writable story
+      throw new Meteor.Error(403, "您没有权限删除该文章")
+
+    logger.info "delete story #{story.title}"
+    Babble.Story.delete story

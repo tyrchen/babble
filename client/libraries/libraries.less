@@ -18,3 +18,16 @@
   }
   
 }
+
+.modal.create {
+  width: 70%; /* desired relative width */
+  left: 15%; /* (100%-width)/2 */
+  margin: auto auto auto auto; /* place center */
+  &.fade.in {
+    top:50px; /* fade in to correct spot */
+  }
+  form {
+    label.control-label {width: 70px;}
+    textarea {width:760px;height: 200px;}
+  }
+}
