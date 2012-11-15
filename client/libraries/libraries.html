@@ -1,16 +1,15 @@
 <template name="library">
   <div class="library">
     {{#with library}}
-    <div class="hero-unit">
+    <div class="title">
       <h1>{{title}}</h1>
-      {{#if subtitle}}
       <h3>{{subtitle}}</h3>
-      {{/if}}
       <ul class="authors">
       {{#each authors}}
         <li><img class="avatar-medium" src="{{avatar}}" /></li>
       {{/each}}
       </ul>
+      <p>{{description}}</p>
     </div>
     <div class="books row-fluid">
       <ul class="thumbnails">
@@ -20,7 +19,7 @@
         </li>
         {{/each}}
         {{#if writable}}
-        <li class="span4">
+        <li class="span4 book-create">
           {{>bookCreatePanel}}
         </li>
         {{/if}}
@@ -34,15 +33,26 @@
   <div class="thumbnail">
     <div class="caption">
       <h3>{{title}}</h3>
-      <h4>{{subtitle}}</h4>
+      <h4> {{subtitle}} </h4>
       <p>{{description}}</p>
+    </div>
+    <div class="footer">
+      <span>{{stories}}篇文章，{{hearts}}个喜欢，{{read}}人次读过</span>
 
+      <span class="controls">
+        {{#if writable}}
+        <a href="#" class="story-edit"><i class="icon-edit"></i> 编辑</a>
+        {{/if}}
+        {{#if deletable}}
+        <a href="#" class="story-delete"><i class="icon-trash"></i> 删除</a>
+        {{/if}}
+      </span>
     </div>
   </div>
 </template>
 
 <template name="bookCreatePanel">
-  <div class="thumbnail book-create">
+  <div class="thumbnail">
     <div class="caption">
       <h3>创建系列</h3>
       <h4>创建一个新的系列内容</h4>

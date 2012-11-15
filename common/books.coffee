@@ -17,6 +17,15 @@ Babble.Book.writable = (book, userId = null) ->
   else
     _.contains book.authors, Meteor.userId()
 
+Babble.Book.Deletable = (book, userId = null) ->
+  if typeof book is 'string'
+    book = Babble.Book.getById book
+
+  if Babble.Book.writable book, userId
+    return not book.stories or book.stories is 0
+
+  return false
+
 
 if Meteor.is_server
   Babble.Book.create = (info) ->

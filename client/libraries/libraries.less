@@ -1,5 +1,5 @@
 .library {
-  .hero-unit {text-align: center;}
+  .title {text-align: center;}
   ul {list-style-type: none;}
   .books {
     .thumbnails {
@@ -9,6 +9,7 @@
 }
 
 .book-create, .book-summary {
+  height: 250px;
   background: #fff;
   &:hover {
     cursor: pointer;
@@ -16,7 +17,20 @@
     -moz-box-shadow:0 0 8px rgba(0,0,0,0.2);
     box-shadow:0 0 8px rgba(0,0,0,0.2)
   }
-  
+  .thumbnail {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    position: relative;
+    .caption {
+      h4 {height: 20px; display: block;}
+      height: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      p {text-overflow: ellipsis;}
+    }
+
+  }
 }
 
 .modal.create {

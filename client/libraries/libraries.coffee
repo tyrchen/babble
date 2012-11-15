@@ -1,8 +1,5 @@
 _.extend Template.library,
   events:
-    'click .book-create': (e) ->
-      Template.bookCreatePanel.showDialog()
-
     'click .book-summary': (e) ->
       Router.setBook $(e.currentTarget).data('id')
 
@@ -18,9 +15,21 @@ _.extend Template.library,
   books: ->
     Books.find lid: @_id
 
+_.extend Template.bookSummary,
+  writable: ->
+    Babble.Library.writable @lid
+
+  deletable: ->
+    Babble.Book.Deletable @
+
 _.extend Template.bookCreatePanel,
   events:
+    'click': (e) ->
+      Template.bookCreatePanel.showDialog()
+
     'click #book-create-submit': (e) ->
+      e.preventDefault()
+      e.stopPropagation()
       title = $.trim $('#book-title').val()
       #slug = $('#book-slug').val()
       subtitle = $.trim $('#book-subtitle').val()
@@ -50,10 +59,10 @@ _.extend Template.bookCreatePanel,
       Template.bookCreatePanel.closeDialog()
 
   closeDialog: ->
+    $('#book-create-dialog').modal 'hide'
     amplify.store 'bookToCreate', null
     $('#book-create-dialog form')[0]?.reset()
     $("#book-create-error").html('')
-    $('#book-create-dialog').modal 'hide'
 
   showDialog: ->
     info = amplify.store 'bookToCreate'
