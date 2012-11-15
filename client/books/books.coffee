@@ -52,11 +52,11 @@ _.extend Template.composePanel,
     $('#story-content').tinymce
       script_url: '/tiny_mce/tiny_mce.js'
       theme: 'advanced'
-      plugins: 'autolink,lists,style,fullscreen'
+      plugins: 'autolink,lists,style,fullscreen,filepicker'
       mode: 'exact'
       language: 'cn'
       valid_elements: Babble.Const.VALID_ELEMENTS
-      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen,|,code"
+      theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,formatselect,fontselect,fontsizeselect,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,forecolor,backcolor,|,fullscreen,|,code,|,filepicker"
       theme_advanced_blockformats : "p,h1,h2,h3,h4,h5,h6,pre"
 
     if info
@@ -77,7 +77,7 @@ _.extend Template.composePanel,
       $node.find('pre').addClass('prettyprint linenums')
 
       html = $node.html()
-      
+
       title = $.trim $('#story-title').val()
       #slug = $('#story-slug').val()
       subtitle = $.trim $('#story-subtitle').val()
@@ -127,3 +127,6 @@ _.extend Template.storySummary,
 
   created: ->
     moment(new Date(@createdAt)).fromNow()
+
+Meteor.startup ->
+  filepicker.setKey 'Aty5T6XmXRWyke0IG01caz'
