@@ -30,7 +30,13 @@ Babble.Router.router = Backbone.Router.extend
     'essays/:id': 'story'
 
   home: ->
-    this.navigate "/sets/#{Babble.Const.DEFAULT_LIBRARY_ID}"
+    self = @
+    Meteor.autorun (handle) ->
+
+      l = Libraries.findOne()
+      if l
+        handle.stop()
+        self.navigate "/sets/#{l._id}"
 
   library: (id) ->
     #Babble.Router.setState 'library', slug
